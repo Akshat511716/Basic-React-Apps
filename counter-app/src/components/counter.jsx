@@ -1,46 +1,34 @@
 import React, { Component } from "react";
 class Counter extends Component {
-  state = { count: 0 };
+  state = { value: this.props.value };
 
   handleIncrement = () => {
-    this.setState({ count: this.state.count + 1 });
+    this.setState({ value: this.state.value + 1 });
   };
 
   render() {
-    const myStyle = {
-      backgroundColor: "red",
-      fontSize: "5rem",
-      // margin: " 5rem auto",
-      fontWeight: "Bold",
-      // height: "100vh",
-      display: "grid",
-      justifySelf: "center",
-      gridTemplateColumns: "1fr 1fr",
-      // gridGap: "10rem",
-    };
     return (
       <div>
-        <section style={myStyle}>
-          <span className={this.getBagdeClasses()}>{this.formatCount()}</span>
-          <button
-            onClick={this.handleIncrement}
-            className="btn btn-secondary btn-xl"
-          >
-            Increment
-          </button>
-        </section>
+        {this.props.children}
+        <span className={this.getBagdeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
       </div>
     );
   }
 
   getBagdeClasses = () => {
     let classes = "badge m-2 bg-";
-    classes += this.state.count === 0 ? "warning" : "primary";
+    classes += this.state.value === 0 ? "warning" : "primary";
     return classes;
   };
 
   formatCount = () => {
-    const count = this.state.count;
+    const count = this.state.value;
     return count === 0 ? "Zero" : count;
   };
 }
